@@ -3,10 +3,14 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
+import { useNavigate } from "react-router";
+
 import Typography from "@mui/material/Typography";
 
 const Header = (props ) => {
   const title = props.title
+    const navigate = useNavigate();
+
   return (
     <Paper 
       component="div" 
@@ -20,7 +24,10 @@ const Header = (props ) => {
       <IconButton
         aria-label="go back"
       >
+        <IconButton aria-label="go back" onClick={() => navigate(-1)}>
         <ArrowBackIcon color="primary" fontSize="large" />
+      </IconButton>
+
       </IconButton>
 
       <Typography variant="h4" component="h3">
@@ -29,7 +36,10 @@ const Header = (props ) => {
       <IconButton
         aria-label="go forward"
       >
+      <IconButton aria-label="go forward" onClick={() => navigate(+1)}>
         <ArrowForwardIcon color="primary" fontSize="large" />
+      </IconButton>
+
       </IconButton>
     </Paper>
   );
