@@ -23,12 +23,21 @@ const MoviesContextProvider = (props) => {
     ) )
   };
 
+    const [myReviews, setMyReviews] = useState( {} ) 
+
+      const addReview = (movie, review) => {
+    setMyReviews( {...myReviews, [movie.id]: review } )
+  };
+  console.log(myReviews);
+
+
   return (
     <MoviesContext.Provider
       value={{
         favorites,
         addToFavorites,
-        removeFromFavorites
+        removeFromFavorites,
+        addReview   
       }}
     >
       {props.children}
