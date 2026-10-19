@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getUpcomingMovies } from "../api/tmdb-api";
 import PageTemplate from "../components/templateMovieListPage";
 import Spinner from "../components/spinner";
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd'
 
 const UpcomingMoviesPage = () => {
   const { data, error, isPending, isError } = useQuery({
@@ -25,6 +26,13 @@ const UpcomingMoviesPage = () => {
       title="Upcoming Movies"
       movies={movies}
       selectFavorite={selectFavorite}
+      action={(movie) => {
+        return (
+            <>
+            <PlaylistAddIcon movies = {movie}/>
+            </>
+        );
+      }}
     />
   );
 };
