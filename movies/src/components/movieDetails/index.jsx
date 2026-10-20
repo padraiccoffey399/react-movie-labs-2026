@@ -12,6 +12,7 @@ import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import MovieReviews from "../movieReviews"
 import { getMovieCast } from "../../api/tmdb-api";
+import { Link } from "react-router";
 
 
 
@@ -97,6 +98,7 @@ const cast = credits?.cast ?? [];
           <Typography variant="body2" color="text.secondary">
             {person.character}
           </Typography>
+          <Link to={`/people/${person.id}`}>Actor details</Link>
         </Box>
         ))}
       </Box>
