@@ -1,12 +1,10 @@
 import React from "react";
 import { useParams } from 'react-router';
-import MovieDetails from "../components/movieDetails/";
 import PageTemplate from "../components/templateMoviePage";
-import useMovie from "../hooks/useMovie";
-import { getMovie, getMovieCast } from '../api/tmdb-api'
 import { getPerson } from '../api/tmdb-api';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner'
+import PersonDetails from "../components/personDetails"; 
 
 
 const PersonDetailsPage = () => {
@@ -26,14 +24,13 @@ const PersonDetailsPage = () => {
 
 
   return (
-    <main>
-        <h1>
-            {person.name}
-        </h1>
-        <p>
-            {person.biography}
-        </p>
-    </main>
+    <>
+        {person ? (
+          <PersonDetails person = {person}/>
+        ) : (
+          <p>Waiting for details</p>
+        )}
+    </>
   );
 };
 
