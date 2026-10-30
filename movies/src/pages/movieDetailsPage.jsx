@@ -2,19 +2,14 @@ import React from "react";
 import { useParams } from 'react-router';
 import MovieDetails from "../components/movieDetails/";
 import PageTemplate from "../components/templateMoviePage";
-import useMovie from "../hooks/useMovie";
-import { getMovie } from '../api/tmdb-api'
-import { useQuery } from '@tanstack/react-query';
-import Spinner from '../components/spinner'
-// import useMovie from "../hooks/useMovie";   Redundant
-
+import useMovie from "../hooks/useMovie"; // 1. Use your custom hook here!
+import Spinner from '../components/spinner';
 
 const MoviePage = (props) => {
   const { id } = useParams();
-    const { data: movie, error, isPending, isError  } = useQuery({
-    queryKey: ['movie', {id: id}],
-    queryFn: getMovie,
-  })
+  
+  // 2. Replace manual useQuery with your custom hook
+  const { data: movie, error, isPending, isError } = useMovie(id);
 
   if (isPending) {
     return <Spinner />;
@@ -23,7 +18,6 @@ const MoviePage = (props) => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-
 
   return (
     <>

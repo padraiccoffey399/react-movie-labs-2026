@@ -5,14 +5,12 @@ import { getPerson } from '../api/tmdb-api';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner'
 import PersonDetails from "../components/personDetails"; 
+import usePerson from "../hooks/usePerson";
 
 
 const PersonDetailsPage = () => {
   const { id } = useParams();
-  const { data: person, error, isPending, isError } = useQuery({
-    queryKey: ["person", { id }],
-    queryFn: getPerson,
-  });
+  const { data: person, error, isPending, isError } = usePerson(id);
 
   if (isPending) {
     return <Spinner />;

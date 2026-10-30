@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
-import {getMovie} from '../api/tmdb-api'
+import { useQuery } from "@tanstack/react-query";
+import { getMovie } from "../api/tmdb-api";
 
-const useMovie = id => {
-  const [movie, setMovie] = useState(null);
-  useEffect(() => {
-    getMovie(id).then(movie => {
-      setMovie(movie);
-    });
-  }, [id]);
-  return [movie, setMovie];
+const useMovie = (id) => {
+  return useQuery({
+    queryKey: ["movie", { id }],
+    queryFn: getMovie,
+  });
 };
 
 export default useMovie;
