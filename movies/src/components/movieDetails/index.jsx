@@ -13,7 +13,7 @@ import Box from "@mui/material/Box";
 import MovieReviews from "../movieReviews"
 import { getMovieCast } from "../../api/tmdb-api";
 import { Link } from "react-router";
-
+import useMovieRecommendations from "../../hooks/useMovieRecommendations"; 
 
 
 const root = {
@@ -32,8 +32,10 @@ const {data: credits } = useQuery({
   queryKey: ["cast", {id: movie.id}],
   queryFn: getMovieCast
 });
+const { data: recommendationsData } = useMovieRecommendations(movie.id);
 
 const cast = credits?.cast ?? [];
+const recommendations = recommendationsData?.results ?? [];
 
   return (
     <>
@@ -99,6 +101,40 @@ const cast = credits?.cast ?? [];
             {person.character}
           </Typography>
           <Link to={`/people/${person.id}`}>Actor details</Link>
+        </Box>
+        ))}
+      </Box>
+      
+
+      <Typography variant="h5" component="h3" sx={{ mt: 3, mb: 1 }}>
+        Recommendations
+      </Typography>
+       <Box sx={{ display: "flex", overflowX: "auto", gap: 2, pb: 1 }}>
+        {recommendations.map((movie) => (
+        <Box key={movie.id} sx={{ flex: "0 0 140px" }}>
+          {movie.poster_path ? (
+            <img
+              src={`https://image.tmdb.org/t/p/w185${movie.poster_path}`}
+              alt={movie.title}
+              style={{
+                display: "block",
+                width: "100%",
+                height: 180,
+                objectFit: "cover",
+                borderRadius: 4,
+              }}
+            />
+          ) : (
+            <Box sx={{ height: 180, bgcolor: "grey.300", borderRadius: 1 }} />
+          )}
+
+          <Typography variant="subtitle2" sx={{ mt: 1 }}>
+            {movie.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {movie.genre}
+          </Typography>
+          <Link to={`/movies/${movie.id}`}>Movie Details</Link>
         </Box>
         ))}
       </Box>
