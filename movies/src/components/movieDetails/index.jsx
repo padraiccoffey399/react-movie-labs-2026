@@ -49,28 +49,64 @@ const recommendations = recommendationsData?.results ?? [];
 
       <Paper 
         component="ul" 
-        sx={{...root}}
+        sx={{
+          ...root,
+        bgcolor: "var(--bg)",
+        color: "var(--text)",
+        borderColor: "var(--border)",
+      }}
       >
         <li>
-          <Chip label="Genres" sx={{...chip}} color="primary" />
+          <Chip label="Genres" sx={{
+            ...chip,
+        bgcolor: "var(--accent)",
+        borderColor: "var(--border)",
+      }}  />
         </li>
         {movie.genres.map((g) => (
           <li key={g.name}>
-            <Chip label={g.name} sx={{...chip}} />
+            <Chip label={g.name} sx={{
+              ...chip,
+              bgcolor: "var(--accent)",
+              borderColor: "var(--border)",
+            }}       variant="outlined" />
           </li>
         ))}
       </Paper>
-      <Paper component="ul" sx={{...root}}>
-        <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
+      <Paper component="ul" sx={{
+          ...root,
+        bgcolor: "var(--bg)",
+      }}>
+        <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`}
+        sx={{
+          ...chip,
+        color: "var(--text)",
+        borderColor: "var(--border)",
+      }}  />
         <Chip
           icon={<MonetizationIcon />}
           label={`${movie.revenue.toLocaleString()}`}
+          sx={{
+          ...chip,
+        color: "var(--text)",
+        borderColor: "var(--border)",
+      }}
         />
         <Chip
           icon={<StarRate />}
           label={`${movie.vote_average} (${movie.vote_count})`}
+          sx={{
+          ...chip,
+        color: "var(--text)",
+        borderColor: "var(--border)",
+      }}
         />
-        <Chip label={`Released: ${movie.release_date}`} />
+        <Chip label={`Released: ${movie.release_date}`} 
+        sx={{
+          ...chip,
+        color: "var(--text)",
+        borderColor: "var(--border)",
+      }}/>
       </Paper>
       <Typography variant="h5" component="h3" sx={{ mt: 3, mb: 1 }}>
         Cast

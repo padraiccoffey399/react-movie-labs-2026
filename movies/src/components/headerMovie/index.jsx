@@ -16,6 +16,9 @@ const MovieHeader = (props) => {
         component="div" 
         sx={{
             display: "flex",
+            bgcolor: "var(--bg)",
+            color: "var(--text)",
+            borderColor: "var(--border)",
             justifyContent: "space-around",
             flexWrap: "wrap",
             padding: 1.5,

@@ -35,7 +35,11 @@ export default function MovieCard({ movie, action, loading}) {
   };
 
   return (
-    <Card>
+    <Card sx={{ 
+      bgcolor: "var(--bg)",
+       color: "var(--text)",
+       border: "2px solid car(--border)",
+      borderColor: "var(--border)" }}>
       <CardHeader
         avatar={
           movie.favorite ? (

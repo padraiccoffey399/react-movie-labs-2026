@@ -32,10 +32,10 @@
 
 
   :root[data-theme="dark"] {
-    --text: #9ca3af;
+    --text: #f1f4fb;
     --text-h: #f3f4f6;
     --bg: #16171d;
-    --border: #2e303a;
+    --border: #43444b;
     --code-bg: #1f2028;
     --accent: #4cc554;
     --accent-bg: rgba(192, 132, 252, 0.15);

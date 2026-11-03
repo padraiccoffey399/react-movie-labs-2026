@@ -80,9 +80,20 @@ function MovieListPageTemplate({ movies, title, action }) {
               count={totalPages}
               page={page}
               onChange={handlePageChange}
-              color="primary"
               size="large"
               aria-label="Movie list pages"
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  color: "var(--text)",
+                },
+                "& .MuiPaginationItem-root.Mui-selected": {
+                  color: "var(--bg)",
+                  backgroundColor: "var(--accent)",
+                },
+                "& .MuiPaginationItem-root.Mui-selected:hover": {
+                  backgroundColor: "var(--accent)",
+                },
+              }}
             />
           </Box>
         </Grid>
