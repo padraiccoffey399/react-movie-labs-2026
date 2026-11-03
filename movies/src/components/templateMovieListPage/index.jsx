@@ -11,6 +11,7 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [ratingFilter, setRatingFilter] = useState(0);
+  const [sortingFilter, setSortingFilter] = useState("default");
   const [page, setPage] = useState(1);
   const itemsPerPage = 20;
   const genreId = Number(genreFilter);
@@ -27,6 +28,15 @@ function MovieListPageTemplate({ movies, title, action }) {
       return rating > 0 ? m.vote_average >= rating : true;
     });
 
+  if (sortingFilter !== "default") {
+    displayedMovies.sort((a, b) => {
+      const titleOrder = a.title.localeCompare(b.title, undefined, {
+        sensitivity: "base",
+      });
+      return sortingFilter === "title-desc" ? -titleOrder : titleOrder;
+    });
+  }
+
   const totalPages = Math.ceil(displayedMovies.length / itemsPerPage);
   const paginatedMovies = displayedMovies.slice(
     (page - 1) * itemsPerPage,
@@ -41,6 +51,8 @@ function MovieListPageTemplate({ movies, title, action }) {
       setGenreFilter(value);
     } else if (type === "rating") {
       setRatingFilter(value);
+    } else if (type === "sort") {
+      setSortingFilter(value);
     }
   };
 
@@ -65,6 +77,7 @@ function MovieListPageTemplate({ movies, title, action }) {
             titleFilter={nameFilter}
             genreFilter={genreFilter}
             ratingFilter={ratingFilter}
+            sortingFilter={sortingFilter}
           />
         </Grid>
         <Grid container wrap="wrap" size={{ xs: 12, sm: 6, md: 8, lg: 12, xl: 10 }}>

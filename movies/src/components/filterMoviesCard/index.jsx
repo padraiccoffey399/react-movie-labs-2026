@@ -21,6 +21,12 @@ const formControl = {
   backgroundColor: "rgb(255, 255, 255)"
 };
 
+const sorts = [
+  { id: "default", name: "Default order" },
+  { id: "title-asc", name: "Title (A-Z)" },
+  { id: "title-desc", name: "Title (Z-A)" },
+];
+
 export default function FilterMoviesCard(props) {
   const { data, error, isPending, isError } = useQuery({
     queryKey: ['genres'],
@@ -39,6 +45,7 @@ export default function FilterMoviesCard(props) {
   if (genres[0].name !== "All") {
     genres.unshift({ id: "0", name: "All" });
   }
+  
 
   const handleChange = (e, type, value) => {
     e.preventDefault();
@@ -55,6 +62,10 @@ export default function FilterMoviesCard(props) {
 
   const handleRatingChange = (e, newValue) => {
     props.onUserInput("rating", newValue);
+  };
+
+  const handleSortChange = (e) => {
+    props.onUserInput("sort", e.target.value);
   };
 
   return (
@@ -120,6 +131,24 @@ export default function FilterMoviesCard(props) {
           />
 
           
+        </FormControl>
+        <FormControl sx={{...formControl}}>
+          <InputLabel id="sorting-label"> Sort</InputLabel>
+          <Select
+            labelId="sorting-label"
+            id="sorting-select"
+            label="Sort"
+            value={props.sortingFilter}
+            onChange={handleSortChange}
+          >
+            {sorts.map((sort) => {
+              return (
+                <MenuItem key={sort.id} value={sort.id}>
+                  {sort.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
         </FormControl>
 
       </CardContent>
