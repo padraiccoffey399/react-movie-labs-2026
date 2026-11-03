@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import MovieReviews from "../movieReviews"
+import MovieHeader from "../headerMovie";
 import { getPersonCredits } from "../../api/tmdb-api";
 import { Link } from "react-router";
 
@@ -37,6 +38,8 @@ const personCredits = credits?.cast ?? [];
 
   return (
     <>
+
+      <MovieHeader movie={{ ...person, title: person.name }} />
       <Typography variant="h5" component="h3">
         Overview
       </Typography>

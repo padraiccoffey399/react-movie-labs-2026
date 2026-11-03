@@ -56,9 +56,14 @@ const SiteHeader = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const toggleTheme = () => {
+  const root = document.documentElement;
+  root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+};
+
   return (
     <>
-      <AppBar position="fixed" color="secondary">
+      <AppBar position="fixed" sx={{ bgcolor: "var(--accent)" }}>
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
             TMDB Client
@@ -117,6 +122,9 @@ const SiteHeader = () => {
             )}
           <Button color="inherit" onClick={() => setBrowseOpen(true)}>
             Browse
+          </Button>
+          <Button color="inherit" onClick={toggleTheme}>
+            Toggle theme
           </Button>
         </Toolbar>
       </AppBar>

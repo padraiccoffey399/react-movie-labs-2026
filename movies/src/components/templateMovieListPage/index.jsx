@@ -50,13 +50,13 @@ function MovieListPageTemplate({ movies, title, action }) {
 
   return (
     <Grid container>
-      <Grid size={12}>
+      <Grid size={32}>
         <Header title={title} />
       </Grid>
       <Grid container wrap="wrap" sx={{ flex: "1 1 500px" }}>
         <Grid 
           key="find" 
-          size={{ xs: 12, sm: 6, md: 8, lg: 12, xl: 10 }}
+          size={{ xs: 12, sm: 6, md: 4, lg: 12, xl: 2 }}
 
           sx={{ padding: "20px" }}
         >

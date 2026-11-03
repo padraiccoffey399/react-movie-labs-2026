@@ -15,13 +15,15 @@ const HomePage = (props) => {
     queryFn: getMovies,
   })
   
+ 
+
   if (isPending) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (isError) {
-    return <h1>{error.message}</h1>
-  }  
+    return <h1>{error.message}</h1>;
+  }
   
   const movies = data.results;
 

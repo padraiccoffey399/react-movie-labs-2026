@@ -14,9 +14,12 @@ import img from '../../images/film-poster-placeholder.png'
 import Avatar from '@mui/material/Avatar';
 import { useContext } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
+import MoviePoster from "../moviePoster";
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
 
+export default function MovieCard({ movie, action, loading}) {
 
-export default function MovieCard({ movie, action }) {
     const { favorites, addToFavorites } = useContext(MoviesContext);
 
 
@@ -47,13 +50,13 @@ export default function MovieCard({ movie, action }) {
           </Typography>
         }
       />
-      <CardMedia
-        sx={{ height: 500 }}
-        image={
+      <MoviePoster
+        src={
           movie.poster_path
             ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
             : img
         }
+        title={movie.title}
       />
       <CardContent>
         <Grid container>
