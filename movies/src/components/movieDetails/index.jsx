@@ -14,6 +14,7 @@ import MovieReviews from "../movieReviews"
 import { getMovieCast } from "../../api/tmdb-api";
 import { Link } from "react-router";
 import useMovieRecommendations from "../../hooks/useMovieRecommendations"; 
+import useMovieVideos from "../../hooks/useMovieVideos";
 
 
 const root = {
@@ -33,9 +34,15 @@ const {data: credits } = useQuery({
   queryFn: getMovieCast
 });
 const { data: recommendationsData } = useMovieRecommendations(movie.id);
+const {data : videosData } = useMovieVideos(movie.id);
+
 
 const cast = credits?.cast ?? [];
 const recommendations = recommendationsData?.results ?? [];
+
+const videos = videosData?.results ?? [];
+const trailers = videos.find((video) => video.type === "Trailer" && video.site === "YouTube");
+const videoKey = trailers?.key;
 
   return (
     <>
@@ -108,6 +115,33 @@ const recommendations = recommendationsData?.results ?? [];
         borderColor: "var(--border)",
       }}/>
       </Paper>
+
+      {videoKey && (
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: 1100,
+            aspectRatio: "16 / 9",
+            mx: "auto",
+            my: 2,
+          }}
+        >
+          <Box
+            component="iframe"
+            src={`https://www.youtube.com/embed/${videoKey}`}
+            title="Movie Trailer"
+            allowFullScreen
+            sx={{
+              display: "block",
+              width: "100%",
+              height: "100%",
+              border: 0,
+            }}
+          />
+        </Box>
+      )}
+
+
       <Typography variant="h5" component="h3" sx={{ mt: 3, mb: 1 }}>
         Cast
       </Typography>

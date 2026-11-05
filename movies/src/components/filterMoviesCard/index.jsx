@@ -21,6 +21,30 @@ const formControl = {
   backgroundColor: "rgb(255, 255, 255)"
 };
 
+const selectControl = {
+  ...formControl,
+  "& .MuiInputLabel-root": {
+    color: "#263238",
+    fontWeight: 700,
+  },
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: "#fff",
+    "& fieldset": {
+      borderColor: "#455a64",
+      borderWidth: 2,
+    },
+    "&:hover fieldset": {
+      borderColor: "#00695c",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#00695c",
+    },
+  },
+  "& .MuiSelect-select": {
+    fontWeight: 600,
+  },
+};
+
 const sorts = [
   { id: "default", name: "Default order" },
   { id: "title-asc", name: "Title (A-Z)" },
@@ -95,11 +119,12 @@ export default function FilterMoviesCard(props) {
         />
 
         {/* Genre Dropdown */}
-        <FormControl sx={{...formControl}}>
+        <FormControl sx={selectControl}>
           <InputLabel id="genre-label">Genre</InputLabel>
           <Select
             labelId="genre-label"
             id="genre-select"
+            label="Genre"
             defaultValue=""
             value={props.genreFilter}
             onChange={handleGenreChange}
@@ -132,7 +157,7 @@ export default function FilterMoviesCard(props) {
 
           
         </FormControl>
-        <FormControl sx={{...formControl}}>
+        <FormControl sx={selectControl}>
           <InputLabel id="sorting-label"> Sort</InputLabel>
           <Select
             labelId="sorting-label"
