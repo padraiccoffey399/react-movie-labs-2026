@@ -6,6 +6,7 @@ import StarRate from "@mui/icons-material/StarRate";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
+import Skeleton from "@mui/material/Skeleton";
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Drawer from "@mui/material/Drawer";
@@ -34,7 +35,8 @@ const {data: credits } = useQuery({
   queryFn: getMovieCast
 });
 const { data: recommendationsData } = useMovieRecommendations(movie.id);
-const {data : videosData } = useMovieVideos(movie.id);
+const {data: videosData,isPending: isVideosPending, isError: isVideosError,
+} = useMovieVideos(movie.id);
 
 
 const cast = credits?.cast ?? [];
@@ -116,7 +118,21 @@ const videoKey = trailers?.key;
       }}/>
       </Paper>
 
-      {videoKey && (
+      {isVideosPending ? (
+        <Skeleton
+          variant="rounded"
+          sx={{
+            width: "100%",
+            height: "100%",
+            maxWidth: 1100,
+            aspectRatio: "16 / 9",
+            mx: "auto",
+            my: 2,
+          }}
+        />
+      ) : isVideosError ? (
+        <Typography>Could not load the trailer.</Typography>
+      ) : videoKey ? (
         <Box
           sx={{
             width: "100%",
@@ -139,6 +155,8 @@ const videoKey = trailers?.key;
             }}
           />
         </Box>
+      ) : (
+        <Typography>No trailer available.</Typography>
       )}
 
 
