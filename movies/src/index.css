@@ -95,6 +95,32 @@ p {
   margin: 0;
 }
 
+.trailer-skeleton.MuiSkeleton-root {
+  background: linear-gradient(130deg, #939191, #d5d3d3, #979797);
+  background-size: 200% 200%;
+  animation: trailer-gradient 2s ease infinite;
+}
+
+@keyframes trailer-gradient {
+  0% {
+    background-position: 10% 0%;
+  }
+
+  50% {
+    background-position: 91% 100%;
+  }
+
+  100% {
+    background-position: 10% 0%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trailer-skeleton.MuiSkeleton-root {
+    animation: none;
+  }
+}
+
 code,
 .counter {
   font-family: var(--mono);

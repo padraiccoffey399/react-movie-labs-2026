@@ -35,7 +35,7 @@ const {data: credits } = useQuery({
   queryFn: getMovieCast
 });
 const { data: recommendationsData } = useMovieRecommendations(movie.id);
-const {data: videosData,isPending: isVideosPending, isError: isVideosError,
+const {data: videosData, isPending: isVideosPending, isError: isVideosError,
 } = useMovieVideos(movie.id);
 
 
@@ -121,9 +121,11 @@ const videoKey = trailers?.key;
       {isVideosPending ? (
         <Skeleton
           variant="rounded"
+          animation={false}
           sx={{
+            display: "block",
             width: "100%",
-            height: "100%",
+            height: "auto",
             maxWidth: 1100,
             aspectRatio: "16 / 9",
             mx: "auto",
